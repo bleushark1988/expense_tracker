@@ -1,0 +1,79 @@
+extends layout
+
+block content
+  h1 Expense Tracker
+  hr
+  table(style='width:100%' , border = '2')
+    tr
+        th 
+          h5 Id
+        th 
+          h5 Date
+        th 
+          h5 Amount
+        th 
+          h5 Description
+        th 
+          h5 Comment
+        th 
+          h5 Edit
+    for item , i in expenses
+      tr
+        td= i + 1
+        td= item.date
+        td= item.amount
+        td= item.description
+        td= item.comment
+        td(style='width:10%')
+          a(href='/expense/delete' style='color:#FF0000') Delete 
+          a(href='/' ) Update 
+  hr
+  .pb-2.mt-2.mb-4.border-bottom
+  h3 Insert Expense
+  form(action='/expense/insert', method='POST')
+    input(type='hidden', name='_csrf', value=_csrf)
+    .form-group.row
+      label(class='col-md-2 col-form-label font-weight-bold', for='date') Date
+      .col-md-4
+        textarea.form-control(name='date', id='date', rows='1', autofocus=(!unknownUser).toString())
+    .form-group.row
+      label(class='col-md-2 col-form-label font-weight-bold', for='amount') Amount
+      .col-md-2
+        textarea.form-control(name='amount', id='amount', rows='1', autofocus=(!unknownUser).toString())
+    .form-group.row
+      label(class='col-md-2 col-form-label font-weight-bold', for='message') description
+      .col-md-8
+        textarea.form-control(name='description', id='description', rows='1', autofocus=(!unknownUser).toString())
+    .form-group.row
+      label(class='col-md-2 col-form-label font-weight-bold', for='comment') Comment
+      .col-md-8
+        textarea.form-control(name='comment', id='comment', rows='1', autofocus=(!unknownUser).toString())
+    .form-group
+      .offset-md-2.col-md-8.p-1
+        button.btn.btn-primary(type='submit')
+          | Insert
+  hr
+  .pb-2.mt-2.mb-4.border-bottom
+  h3 Update Expense
+  form(action='/expense/update', method='POST')
+    input(type='hidden', name='_csrf', value=_csrf)
+    .form-group.row
+      label(class='col-md-2 col-form-label font-weight-bold', for='date') Date
+      .col-md-4
+        textarea.form-control(name='date', id='date', rows='1', autofocus=(!unknownUser).toString())
+    .form-group.row
+      label(class='col-md-2 col-form-label font-weight-bold', for='amount') Amount
+      .col-md-2
+        textarea.form-control(name='amount', id='amount', rows='1', autofocus=(!unknownUser).toString())
+    .form-group.row
+      label(class='col-md-2 col-form-label font-weight-bold', for='message') description
+      .col-md-8
+        textarea.form-control(name='description', id='description', rows='1', autofocus=(!unknownUser).toString())
+    .form-group.row
+      label(class='col-md-2 col-form-label font-weight-bold', for='comment') Comment
+      .col-md-8
+        textarea.form-control(name='comment', id='comment', rows='1', autofocus=(!unknownUser).toString())
+    .form-group
+      .offset-md-2.col-md-8.p-1
+        button.btn.btn-primary(type='submit')
+          | Update
