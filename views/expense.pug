@@ -3,20 +3,25 @@ extends layout
 block content
   h1 Expense Tracker
   hr
+
   table(style='width:100%' , border = '2')
     tr
         th 
-          h5 Id
+          h5(style='color:#007bff') Id
         th 
-          h5 Date
+          h5 
+            a(href='/expense/sort_date') Date
         th 
-          h5 Amount
+          h5 
+            a(href='/expense/sort_amount') Amount
         th 
-          h5 Description
+          h5 
+            a(href='/expense/sort_description') Description
         th 
-          h5 Comment
+          h5 
+            a(href='/expense/sort_comment') Comment
         th 
-          h5 Edit
+          h5(style='color:#007bff') Edit
     for item , i in expenses
       tr
         td= i + 1
@@ -25,9 +30,9 @@ block content
         td= item.description
         td= item.comment
         td(style='width:10%')
-          a(href='/expense/delete' style='color:#FF0000') Delete 
-          a(href='/' ) Update 
-  hr
+          a(href='/expense/delete?_id='+ item._id style='color:#FF0000') Delete 
+          a(href='/expense/update?_id='+ item._id) Update 
+
   .pb-2.mt-2.mb-4.border-bottom
   h3 Insert Expense
   form(action='/expense/insert', method='POST')
@@ -35,45 +40,20 @@ block content
     .form-group.row
       label(class='col-md-2 col-form-label font-weight-bold', for='date') Date
       .col-md-4
-        textarea.form-control(name='date', id='date', rows='1', autofocus=(!unknownUser).toString())
+        input.form-control(type='date', name='date', id='date', rows='1')
     .form-group.row
       label(class='col-md-2 col-form-label font-weight-bold', for='amount') Amount
       .col-md-2
-        textarea.form-control(name='amount', id='amount', rows='1', autofocus=(!unknownUser).toString())
+        input.form-control(name='amount', id='amount', rows='1')
     .form-group.row
       label(class='col-md-2 col-form-label font-weight-bold', for='message') description
       .col-md-8
-        textarea.form-control(name='description', id='description', rows='1', autofocus=(!unknownUser).toString())
+        input.form-control(name='description', id='description', rows='1')
     .form-group.row
       label(class='col-md-2 col-form-label font-weight-bold', for='comment') Comment
       .col-md-8
-        textarea.form-control(name='comment', id='comment', rows='1', autofocus=(!unknownUser).toString())
+        input.form-control(name='comment', id='comment', rows='1')
     .form-group
       .offset-md-2.col-md-8.p-1
         button.btn.btn-primary(type='submit')
           | Insert
-  hr
-  .pb-2.mt-2.mb-4.border-bottom
-  h3 Update Expense
-  form(action='/expense/update', method='POST')
-    input(type='hidden', name='_csrf', value=_csrf)
-    .form-group.row
-      label(class='col-md-2 col-form-label font-weight-bold', for='date') Date
-      .col-md-4
-        textarea.form-control(name='date', id='date', rows='1', autofocus=(!unknownUser).toString())
-    .form-group.row
-      label(class='col-md-2 col-form-label font-weight-bold', for='amount') Amount
-      .col-md-2
-        textarea.form-control(name='amount', id='amount', rows='1', autofocus=(!unknownUser).toString())
-    .form-group.row
-      label(class='col-md-2 col-form-label font-weight-bold', for='message') description
-      .col-md-8
-        textarea.form-control(name='description', id='description', rows='1', autofocus=(!unknownUser).toString())
-    .form-group.row
-      label(class='col-md-2 col-form-label font-weight-bold', for='comment') Comment
-      .col-md-8
-        textarea.form-control(name='comment', id='comment', rows='1', autofocus=(!unknownUser).toString())
-    .form-group
-      .offset-md-2.col-md-8.p-1
-        button.btn.btn-primary(type='submit')
-          | Update

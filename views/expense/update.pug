@@ -1,0 +1,28 @@
+extends ../layout
+
+block content
+  .pb-2.mt-2.mb-4.border-bottom
+  h3 Update Expense
+  form(action='/expense/updated', method='POST')
+    input(type='hidden', name='_csrf', value=_csrf)
+    input(type='hidden', name='_id' id='_id', value=updateData._id)
+    .form-group.row
+      label(class='col-md-2 col-form-label font-weight-bold', for='date') Date
+      .col-md-4
+        input.form-control(type='date', name='date', id='date', rows='1', value=updateData.date)
+    .form-group.row
+      label(class='col-md-2 col-form-label font-weight-bold', for='amount') Amount
+      .col-md-2
+        input.form-control(name='amount', id='amount', rows='1', value=updateData.amount)
+    .form-group.row
+      label(class='col-md-2 col-form-label font-weight-bold', for='message') description
+      .col-md-8
+        input.form-control(name='description', id='description', rows='1', value=updateData.description)
+    .form-group.row
+      label(class='col-md-2 col-form-label font-weight-bold', for='comment') Comment
+      .col-md-8
+        input.form-control(name='comment', id='comment', rows='1', value=updateData.comment)
+    .form-group
+      .offset-md-2.col-md-8.p-1
+        button.btn.btn-primary(type='submit')
+          | Update
